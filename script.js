@@ -1,15 +1,3 @@
-const btnOverview = document.querySelectorAll(".bt-overview")[0]
-const btnStructure = document.querySelectorAll(".bt-overview")[1]
-const planetImg = document.querySelector(".planet-img")
-const planetDescription = document.querySelector(".planet-description")
-
-// Descobre a página atual
-const url = window.location.pathname
-let pageName = window.location.pathname.split("/").pop() || "index"
-let fixedPage = planets[pageName] ? pageName : "mercury"
-
-// Prefixo para as imagens: se estiver em pages/, sobe uma pasta
-const prefix = pageName === "index" ? "" : "../"
 
 const planets = {
     mercury: {
@@ -93,6 +81,19 @@ const planets = {
         }
     },
 }
+
+const btnOverview = document.querySelectorAll(".bt-overview")[0]
+const btnStructure = document.querySelectorAll(".bt-overview")[1]
+const planetImg = document.querySelector(".planet-img")
+const planetDescription = document.querySelector(".planet-description")
+
+// Descobre a página atual
+const url = window.location.pathname
+let pageName = window.location.pathname.split("/").pop() || "index"
+let fixedPage = pageName === "" || pageName === "index" ? "mercury" : pageName;
+
+// Prefixo para as imagens: se estiver em pages/, sobe uma pasta
+const prefix = pageName === "index" ? "" : "../"
 
 // Debug
 console.log("fixedPage:", fixedPage)
