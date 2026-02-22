@@ -1,4 +1,15 @@
+// Descobre a página atual
+const url = window.location.pathname
+let pageName = url.split("/").pop() || "index"
+pageName = pageName.replace(".html", "").toLowerCase()
 
+// Prefixo para as imagens: se estiver em pages/, sobe uma pasta
+const prefix = pageName === "index" ? "" : "../"
+
+// Ajusta fixedPage para index.html = mercury
+let fixedPage = pageName === "" || pageName === "index" ? "mercury" : pageName
+
+// Dados completos dos planetas
 const planets = {
     mercury: {
         overview: {
@@ -7,7 +18,7 @@ const planets = {
         },
         structure: {
             img: `${prefix}images/planet-mercury-internal.svg`,
-            text:"Mercury appears to have a solid silicate crust and mantle overlying a solid, iron sulfide outer core layer, a deeper liquid core layer, and a solid inner core. The planet's density is the second highest in the Solar System at 5.427 g/cm3, only slightly less than Earth's density.",
+            text: "Mercury appears to have a solid silicate crust and mantle overlying a solid, iron sulfide outer core layer, a deeper liquid core layer, and a solid inner core. The planet's density is the second highest in the Solar System at 5.427 g/cm³, only slightly less than Earth's density.",
         }
     },
     venus: {
@@ -17,7 +28,7 @@ const planets = {
         },
         structure: {
             img: `${prefix}images/planet-venus-internal.svg`,
-            text:"The similarity in size and density between Venus and Earth suggests they share a similar internal structure: a core, mantle, and crust. Like that of Earth, Venusian core is most likely at least partially liquid because the two planets have been cooling at about the same rate.",
+            text: "The similarity in size and density between Venus and Earth suggests they share a similar internal structure: a core, mantle, and crust. Like that of Earth, Venusian core is most likely at least partially liquid because the two planets have been cooling at about the same rate.",
         }
     },
     earth: {
@@ -27,7 +38,7 @@ const planets = {
         },
         structure: {
             img: `${prefix}images/planet-earth-internal.svg`,
-            text:"Earth's interior, like that of the other terrestrial planets, is divided into layers by their chemical or physical (rheological) properties. The outer layer is a chemically distinct silicate solid crust, which is underlain by a highly viscous solid mantle.",
+            text: "Earth's interior, like that of the other terrestrial planets, is divided into layers by their chemical or physical (rheological) properties. The outer layer is a chemically distinct silicate solid crust, which is underlain by a highly viscous solid mantle.",
         }
     },
     mars: {
@@ -37,7 +48,7 @@ const planets = {
         },
         structure: {
             img: `${prefix}images/planet-mars-internal.svg`,
-            text:"Like Earth, Mars has differentiated into a dense metallic core overlaid by less dense materials. Scientists initially determined that the core is at least partially liquid. Current models of its interior imply a core consisting primarily of iron and nickel with about 16–17% sulfur.",
+            text: "Like Earth, Mars has differentiated into a dense metallic core overlaid by less dense materials. Scientists initially determined that the core is at least partially liquid. Current models of its interior imply a core consisting primarily of iron and nickel with about 16–17% sulfur.",
         }
     },
     jupiter: {
@@ -47,7 +58,7 @@ const planets = {
         },
         structure: {
             img: `${prefix}images/planet-jupiter-internal.svg`,
-            text:"When the Juno arrived in 2016, it found that Jupiter has a very diffuse core that mixes into its mantle. A possible cause is an impact from a planet of about ten Earth masses a few million years after Jupiter's formation, which would have disrupted an originally solid Jovian core.",
+            text: "When the Juno arrived in 2016, it found that Jupiter has a very diffuse core that mixes into its mantle. A possible cause is an impact from a planet of about ten Earth masses a few million years after Jupiter's formation, which would have disrupted an originally solid Jovian core.",
         }
     },
     saturn: {
@@ -57,7 +68,7 @@ const planets = {
         },
         structure: {
             img: `${prefix}images/planet-saturn-internal.svg`,
-            text:"Despite consisting mostly of hydrogen and helium, most of Saturn's mass is not in the gas phase, because hydrogen becomes a non-ideal liquid when the density is above 0.01 g/cm3, which is reached at a radius containing 99.9% of Saturn's mass.",
+            text: "Despite consisting mostly of hydrogen and helium, most of Saturn's mass is not in the gas phase, because hydrogen becomes a non-ideal liquid when the density is above 0.01 g/cm³, which is reached at a radius containing 99.9% of Saturn's mass.",
         }
     },
     uranus: {
@@ -67,7 +78,7 @@ const planets = {
         },
         structure: {
             img: `${prefix}images/planet-uranus-internal.svg`,
-            text:"The standard model of Uranus's structure is that it consists of three layers: a rocky (silicate/iron-nickel) core in the centre, an icy mantle in the middle and an outer gaseous hydrogen/helium envelope. The core is relatively small, with a mass of only 0.55 Earth masses.",
+            text: "The standard model of Uranus's structure is that it consists of three layers: a rocky (silicate/iron–nickel) core in the centre, an icy mantle in the middle and an outer gaseous hydrogen/helium envelope. The core is relatively small, with a mass of only 0.55 Earth masses.",
         }
     },
     neptune: {
@@ -77,46 +88,43 @@ const planets = {
         },
         structure: {
             img: `${prefix}images/planet-neptune-internal.svg`,
-            text:"Neptune's internal structure resembles that of Uranus. Its atmosphere forms about 5% to 10% of its mass and extends perhaps 10% to 20% of the way towards the core. Increasing concentrations of methane, ammonia, and water are found in the lower regions.",
+            text: "Neptune's internal structure resembles that of Uranus. Its atmosphere forms about 5% to 10% of its mass and extends perhaps 10% to 20% of the way towards the core. Increasing concentrations of methane, ammonia, and water are found in the lower regions.",
         }
-    },
+    }
 }
 
+
+
+// Botões e elementos do DOM
 const btnOverview = document.querySelectorAll(".bt-overview")[0]
 const btnStructure = document.querySelectorAll(".bt-overview")[1]
 const planetImg = document.querySelector(".planet-img")
 const planetDescription = document.querySelector(".planet-description")
 
-// Descobre a página atual
-const url = window.location.pathname
-let pageName = window.location.pathname.split("/").pop() || "index"
-let fixedPage = pageName === "" || pageName === "index" ? "mercury" : pageName;
-
-// Prefixo para as imagens: se estiver em pages/, sobe uma pasta
-const prefix = pageName === "index" ? "" : "../"
-
-// Debug
-console.log("fixedPage:", fixedPage)
-console.log("planets keys:", Object.keys(planets))
-
+// Função de troca de info
 function changeInfo(type) {
+    if (!planets[fixedPage]) fixedPage = "mercury"
+if (!planets[fixedPage]["overview"]) console.error("Erro: overview não existe para", fixedPage)
+    
     const data = planets[fixedPage][type]
-
     planetImg.src = data.img
     planetDescription.textContent = data.text
 
     btnOverview.classList.remove("active-btn")
     btnStructure.classList.remove("active-btn")
-
-    if (type === "overview") {
-        btnOverview.classList.add("active-btn")
-    } else {
-        btnStructure.classList.add("active-btn")
-    }
+    if (type === "overview") btnOverview.classList.add("active-btn")
+    else btnStructure.classList.add("active-btn")
 }
 
+// Eventos
 btnOverview.addEventListener("click", () => changeInfo("overview"))
 btnStructure.addEventListener("click", () => changeInfo("structure"))
 
 // Inicializa
 changeInfo("overview")
+
+// Debug
+console.log("pageName:", pageName)
+console.log("prefix:", prefix)
+console.log("fixedPage:", fixedPage)
+console.log("planets keys:", Object.keys(planets))
