@@ -4,7 +4,7 @@ background-color: #070724;
 
 :root {
   --gray: #b3bec3;
-  --white: #f5f7fa; /* clean soft white */
+  --white: #f5f7fa; 
   --mercury-gray: #7ac1f3;
   --venus-orange: #FFB16D;
   --earth-purple: #6d2ed1;
@@ -12,7 +12,7 @@ background-color: #070724;
   --jupiter-red: #d83a34;
   --saturn-red: #e25822;
   --uranus-teal: #1ec4a8;
-  --neptune-blue: #2a5fff; /* I picked a good Neptune-looking blue */
+  --neptune-blue: #2a5fff; 
 }
 
 .thin {
@@ -73,6 +73,8 @@ background-color: #070724;
  gap: 0.5em;
  text-align: start;
  justify-content: center;
+ max-width: 400px;
+ width: 350px;
 }
 
 .planet-name {
@@ -82,7 +84,7 @@ background-color: #070724;
 .planet-description {
   color: var(--gray);
   font-size: 18px;
-  max-width: 400px;
+  width: 320px;
 }
 
 .bt-overview {
@@ -108,7 +110,7 @@ background-color: transparent;
   list-style-type: none;
 border: 1px solid var(--gray);
 padding: 1em;
-width: 200px;
+width: 300px;
 }
 
 .h4-info{
@@ -156,12 +158,13 @@ color: var(--white);
 }
 
 .planet-img {
-  width: 320px;
+  width: 280px;
+  
 }
 .active-btn {
-    background-color: white;   /* muda a cor do fundo do botão */
-    color: black;              /* muda a cor do texto */
-    border: 1px solid white;   /* borda opcional */
+    background-color: white;  
+    color: black;              
+    border: 1px solid white;  
     width: 100%;
 }
 
@@ -209,16 +212,17 @@ color: var(--saturn-red);
 
   .ul-info-list {
     flex-direction: column;
-    align-items: center;
+    align-items: start;
   }
 
   .li-info {
     margin: 0 auto;
     width: 300px;
+    justify-content: start;
   }
 
   .li-planet-info {
-    text-align: center;
+    align-items: center;
   }
 }
 
@@ -233,5 +237,13 @@ color: var(--saturn-red);
 
   .bt-overview {
     font-size: 18px;
+    width: 90%;
+    
+    text-align: start;
+    
   } 
+
+   .li-planet-info {
+    text-align: start;
+  }
 }
