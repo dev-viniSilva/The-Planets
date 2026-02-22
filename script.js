@@ -5,6 +5,7 @@ const planetDescription = document.querySelector(".planet-description")
 
 const url = window.location.pathname
 const pageName = url.split("/").pop().replace(".html", "")
+let fixedPage = pageName === "index" ? "mercury" : pageName;
 
 const planets = {
     mercury: {
@@ -97,7 +98,7 @@ const planets = {
 }
 
 function changeInfo(type) {
-    const data = planets[pageName][type]
+    const data = planets[fixedPage][type]
 
     planetImg.src = data.img
     planetDescription.textContent = data.text
