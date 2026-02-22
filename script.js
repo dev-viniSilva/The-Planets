@@ -3,10 +3,6 @@ const btnStructure = document.querySelectorAll(".bt-overview")[1]
 const planetImg = document.querySelector(".planet-img")
 const planetDescription = document.querySelector(".planet-description")
 
-const url = window.location.pathname
-const pageName = url.split("/").pop().replace(".html", "")
-let fixedPage = pageName === "index" ? "mercury" : pageName;
-
 const planets = {
     mercury: {
         overview: {
@@ -96,6 +92,15 @@ const planets = {
         }
     },
 }
+
+const url = window.location.pathname
+const pageName = url.split("/").pop().replace(".html", "").toLocaleLowerCase()
+let fixedPage = pageName === "index" ? "mercury" : pageName;
+
+console.log("fixedPage:", fixedPage)
+console.log("planets keys:", Object.keys(planets))
+
+
 
 function changeInfo(type) {
     const data = planets[fixedPage][type]
