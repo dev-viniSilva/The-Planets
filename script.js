@@ -5,7 +5,7 @@ const planetDescription = document.querySelector(".planet-description")
 
 // Descobre a página atual
 const url = window.location.pathname
-const pageName = url.split("/").pop().replace(".html", "").toLowerCase()
+let pageName = window.location.pathname.split("/").pop() || "index"
 let fixedPage = planets[pageName] ? pageName : "mercury"
 
 // Prefixo para as imagens: se estiver em pages/, sobe uma pasta
