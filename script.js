@@ -1,4 +1,6 @@
+// ===========================
 // Descobre a página atual
+// ===========================
 const url = window.location.pathname
 let pageName = url.split("/").pop() || "index"
 pageName = pageName.replace(".html", "").toLowerCase()
@@ -9,7 +11,9 @@ const prefix = pageName === "index" ? "" : "../"
 // Ajusta fixedPage para index.html = mercury
 let fixedPage = pageName === "" || pageName === "index" ? "mercury" : pageName
 
+// ===========================
 // Dados completos dos planetas
+// ===========================
 const planets = {
     mercury: {
         overview: {
@@ -93,37 +97,47 @@ const planets = {
     }
 }
 
-
-
+// ===========================
 // Botões e elementos do DOM
+// ===========================
 const btnOverview = document.querySelectorAll(".bt-overview")[0]
 const btnStructure = document.querySelectorAll(".bt-overview")[1]
 const planetImg = document.querySelector(".planet-img")
 const planetDescription = document.querySelector(".planet-description")
 
+// ===========================
 // Função de troca de info
+// ===========================
 function changeInfo(type) {
+    // Segurança extra
     if (!planets[fixedPage]) fixedPage = "mercury"
-if (!planets[fixedPage]["overview"]) console.error("Erro: overview não existe para", fixedPage)
-    
+    if (!planets[fixedPage]["overview"]) console.error("Erro: overview não existe para", fixedPage)
+
     const data = planets[fixedPage][type]
     planetImg.src = data.img
     planetDescription.textContent = data.text
 
+    // Botão ativo
     btnOverview.classList.remove("active-btn")
     btnStructure.classList.remove("active-btn")
     if (type === "overview") btnOverview.classList.add("active-btn")
     else btnStructure.classList.add("active-btn")
 }
 
+// ===========================
 // Eventos
+// ===========================
 btnOverview.addEventListener("click", () => changeInfo("overview"))
 btnStructure.addEventListener("click", () => changeInfo("structure"))
 
+// ===========================
 // Inicializa
+// ===========================
 changeInfo("overview")
 
+// ===========================
 // Debug
+// ===========================
 console.log("pageName:", pageName)
 console.log("prefix:", prefix)
 console.log("fixedPage:", fixedPage)
